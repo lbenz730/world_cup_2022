@@ -79,7 +79,23 @@ make_table <- function(Group = 'all', by_group = T) {
       ),
       locations = list(
         cells_body(
-          columns = c(group, net_rating, mean_gd)
+          columns = c(net_rating, mean_gd)
+        )
+      )
+    ) %>% 
+    
+    
+    tab_style(
+      style = list(
+        cell_borders(
+          sides = "left",
+          color = "black",
+          weight = px(3)
+        )
+      ),
+      locations = list(
+        cells_body(
+          columns = c(alpha)
         )
       )
     ) %>% 
