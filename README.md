@@ -1,6 +1,6 @@
-# World Cup 2022
+# FIFA World Cup 2022
 ---
-Modeling and simulation of the 2022 World Cup
+Modeling and simulation of the 2022 FIFA World Cup
 
 #### Model Script
 
