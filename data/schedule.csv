@@ -35,18 +35,18 @@ date,team1,team2,location,group,ko_round,team1_score,team2_score,shootout_winner
 11/27/22,Croatia,Canada,Qatar,F,NA,NA,NA,NA
 12/1/22,Croatia,Belgium,Qatar,F,NA,NA,NA,NA
 12/1/22,Canada,Morocco,Qatar,F,NA,NA,NA,NA
-11/24/22,Switzerland,Cameroon,Qatar,H,NA,NA,NA,NA
-11/24/22,Brazil,Serbia,Qatar,H,NA,NA,NA,NA
-11/28/22,Cameroon,Serbia,Qatar,H,NA,NA,NA,NA
-11/28/22,Brazil,Switzerland,Qatar,H,NA,NA,NA,NA
-12/2/22,Cameroon,Brazil,Qatar,H,NA,NA,NA,NA
-12/2/22,Serbia,Switzerland,Qatar,H,NA,NA,NA,NA
-11/24/22,Uruguay,South Korea,Qatar,G,NA,NA,NA,NA
-11/24/22,Portugal,Ghana,Qatar,G,NA,NA,NA,NA
-11/28/22,South Korea,Ghana,Qatar,G,NA,NA,NA,NA
-11/28/22,Portugal,Uruguay,Qatar,G,NA,NA,NA,NA
-12/2/22,South Korea,Portugal,Qatar,G,NA,NA,NA,NA
-12/2/22,Ghana,Uruguay,Qatar,G,NA,NA,NA,NA
+11/24/22,Switzerland,Cameroon,Qatar,G,NA,NA,NA,NA
+11/24/22,Brazil,Serbia,Qatar,G,NA,NA,NA,NA
+11/28/22,Cameroon,Serbia,Qatar,G,NA,NA,NA,NA
+11/28/22,Brazil,Switzerland,Qatar,G,NA,NA,NA,NA
+12/2/22,Cameroon,Brazil,Qatar,G,NA,NA,NA,NA
+12/2/22,Serbia,Switzerland,Qatar,G,NA,NA,NA,NA
+11/24/22,Uruguay,South Korea,Qatar,H,NA,NA,NA,NA
+11/24/22,Portugal,Ghana,Qatar,H,NA,NA,NA,NA
+11/28/22,South Korea,Ghana,Qatar,H,NA,NA,NA,NA
+11/28/22,Portugal,Uruguay,Qatar,H,NA,NA,NA,NA
+12/2/22,South Korea,Portugal,Qatar,H,NA,NA,NA,NA
+12/2/22,Ghana,Uruguay,Qatar,H,NA,NA,NA,NA
 12/3/22,,,Qatar,NA,R16 1,NA,NA,NA
 12/3/22,,,Qatar,NA,R16 2,NA,NA,NA
 12/5/22,,,Qatar,NA,R16 3,NA,NA,NA

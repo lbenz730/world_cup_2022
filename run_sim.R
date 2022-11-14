@@ -3,13 +3,13 @@ library(tidyverse)
 library(furrr)
 options(future.fork.enable = T)
 options(dplyr.summarise.inform = F)
-plan(multcore(workers = parallel::detectCores()-1))
+plan(multicore(workers = parallel::detectCores()-1))
 source('helpers.R')
 
 ### Simulation Parameters
 n_sims <- 10000
 set.seed(12345)
-run_date <- Sys.Date()
+run_date <- as.Date('2022-11-20')
 
 ### Coefficients
 posterior <- read_rds('model_objects/posterior.rds')
