@@ -32,7 +32,7 @@ goal_expectations <- function(team_1, team_2, location) {
   
   ### Goal Expectations
   lambda_1 <- exp(mu + alpha_1 + delta_2 + loc_1)
-  lambda_2 <- exp(mu + alpha_2 + delta_1 + loc_1)
+  lambda_2 <- exp(mu + alpha_2 + delta_1 + loc_2)
   
   return(list('lambda_1' = lambda_1, 
               'lambda_2' = lambda_2))
