@@ -17,6 +17,5 @@ Data (__internation_soccer_score.csv__) courtesy [Kaggle](https://www.kaggle.com
 
 Flag figures courtesy of [Flaticon](https://www.flaticon.com/).
 
-
 #### Pre-Tournament Predictions
 ![sim-results](figures/pre_wc2022.png)
