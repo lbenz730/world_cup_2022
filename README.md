@@ -19,3 +19,9 @@ Flag figures courtesy of [Flaticon](https://www.flaticon.com/).
 
 #### Pre-Tournament Predictions
 ![sim-results](figures/pre_wc2022.png)
+
+
+#### Previous Tournaments
+* [Euro Cup 2021](https://github.com/lbenz730/euro_cup_2021)
+* [World Cup 2018] (https://github.com/lbenz730/world_cup)
+* [Women's World Cup 2019] (https://github.com/lbenz730/womens_world_cup)
