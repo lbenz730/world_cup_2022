@@ -9,7 +9,7 @@ source('helpers.R')
 ### Simulation Parameters
 n_sims <- 10000
 set.seed(12345)
-run_date <- as.Date('2022-11-20')
+run_date <- Sys.Date()
 
 ### Coefficients
 posterior <- read_rds('model_objects/posterior.rds')
@@ -21,9 +21,9 @@ mu <- mean(posterior$mu)
 df_ratings <- read_csv('predictions/ratings.csv')
 schedule <- 
   read_csv('data/schedule.csv') %>% 
-  mutate('date' = as.Date(date, '%m/%d/%y')) %>% 
-  mutate('team1_score' = ifelse(date >= run_date, NA, team1_score),
-         'team2_score' = ifelse(date >= run_date, NA, team2_score)) %>% 
+  mutate('date' = as.Date(date, '%m/%d/%y')) %>%
+  # mutate('team1_score' = ifelse(date > run_date, NA, team1_score),
+  #        'team2_score' = ifelse(date > run_date, NA, team2_score)) %>%
   mutate('team1_score' = case_when(is.na(shootout_winner) ~ as.numeric(team1_score),
                                    shootout_winner == team1 ~ 0.1 + team1_score,
                                    shootout_winner == team2 ~ -0.1 + team1_score))

@@ -4,7 +4,7 @@ library(tidyverse)
 
 get_scores <- function(date) {
   date_ <- gsub('-', '', date)
-  url <- paste0('https://www.espn.com/soccer/fixtures/_/date/', date_, '/league/uefa.euro')
+  url <- paste0('https://www.espn.com/soccer/fixtures/_/date/', date_, '/league/fifa.world')
   scores <- readHTMLTable(getURL(url))[[1]]
   penalties_ix <- 1 + which(str_detect(scores$result, 'FT-Pens'))
   penalties_winners <- gsub('\\s+win.*', '', scores$match[penalties_ix])
@@ -36,7 +36,7 @@ schedule <-
   mutate('date' = as.Date(date, '%m/%d/%y'))
 
 ### Get Scores for Tournament
-scores <- map_dfr(seq.Date(as.Date('2021-06-11'), Sys.Date(), 1), get_scores)
+scores <- map_dfr(seq.Date(as.Date('2022-11-20'), Sys.Date(), 1), get_scores)
 
 ### Update Scores
 schedule <- 
