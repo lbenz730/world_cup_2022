@@ -104,14 +104,15 @@ ggplot(df_elim, aes(x = team, y = elim_prob)) +
   geom_col(aes(fill = elim_round)) + 
   scale_x_discrete(labels = labels) + 
   scale_y_continuous(labels = scales::percent) +
-  labs(y = 'Probability of Elimincation at Stage',
+  labs(y = 'Probability of Elimination at Stage',
+       x = '',
        title = 'FIFA World Cup 2022',
        subtitle = 'Elimination Snapshot',
        fill = 'Elimination Round') + 
   theme(axis.text.x = ggtext::element_markdown(),
         legend.position = 'bottom')
 
-ggsave('figures/elim.png', height = 12/1.2, width = 16/1.2)
+ggsave('figures/elim.png', height = 9/1.2, width = 16/1.2)
 
 
 

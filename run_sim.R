@@ -38,6 +38,7 @@ if(any(is.na(schedule$team1_score[1:48]))) {
     future_map(dfs_group_stage, sim_group_stage, 
                .options = furrr_options(seed = 12921))
   
+  
   ### Knockout Round
   knockout_brackets <- 
     future_map(group_stage_results, build_knockout_bracket,
@@ -47,6 +48,7 @@ if(any(is.na(schedule$team1_score[1:48]))) {
   gsr <- sim_group_stage(df_group_stage)
   group_stage_results <- map(1:n_sims, ~gsr)
 }
+
 ### R16
 knockout_brackets <- 
   future_map(knockout_brackets, ~{
@@ -135,3 +137,9 @@ history <-
   bind_rows(df_stats %>% mutate('date' = run_date)) %>% 
   arrange(date)
 write_csv(history, 'predictions/history.csv')
+
+write_rds(group_stage_results, 'predictions/sim_rds/group_stage_results.rds')
+write_rds(r16_results, 'predictions/sim_rds/r16_results.rds')
+write_rds(qf_results, 'predictions/sim_rds/qf_results.rds')
+write_rds(sf_results, 'predictions/sim_rds/sf_results.rds')
+write_rds(finals_results, 'predictions/sim_rds/finals_results.rds')
