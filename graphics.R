@@ -5,6 +5,10 @@ history <-
   read_csv('predictions/history.csv') %>% 
   mutate('logo' = paste0('flags/', team, '.png'))
 
+df_stats <- 
+  read_csv('predictions/sim_results.csv') %>% 
+  mutate('logo' = paste0('flags/', team, '.png'))
+
 theme_set(theme_bw() + 
             theme(plot.title = element_text(size = 24, hjust = 0.5),
                   axis.title = element_text(size = 16),
@@ -17,8 +21,9 @@ theme_set(theme_bw() +
 ggplot(history, aes(x = date, y = r16)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.065) +
-  scale_y_continuous(limits = c(0,1), labels = scales::percent) +
+  geom_image(aes(image = logo), size = 0.085) +
+  scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
+  theme(axis.text.x = element_text(angle = 90)) + 
   labs(x = 'Date',
        y = 'Chances of Reaching Knockout Round',
        title = 'World Cup 2022',
@@ -28,12 +33,12 @@ ggsave('figures/r16.png', height = 12/1.2, width = 16/1.2)
 
 ggplot(history, aes(x = date, y = qf)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
-  geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.065) +
-  scale_y_continuous(limits = c(0,1), labels = scales::percent) +
+  geom_image(aes(image = logo), size = 0.085) +
+  scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
+  theme(axis.text.x = element_text(angle = 90)) +
   labs(x = 'Date',
        y = 'Chances of Reaching Quarterfinals',
-       title = 'World Cup 2021',
+       title = 'World Cup 2022',
        subtitle = 'QF Chances Over Time')
 
 ggsave('figures/qf.png', height = 12/1.2, width = 16/1.2)
@@ -41,11 +46,12 @@ ggsave('figures/qf.png', height = 12/1.2, width = 16/1.2)
 ggplot(history, aes(x = date, y = sf)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.065) +
-  scale_y_continuous(limits = c(0,1), labels = scales::percent) +
+  geom_image(aes(image = logo), size = 0.085) +
+  scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
+  theme(axis.text.x = element_text(angle = 90)) +
   labs(x = 'Date',
        y = 'Chances of Reaching Semifinals',
-       title = 'World Cup 2021',
+       title = 'World Cup 2022',
        subtitle = 'SF Chances Over Time')
 
 ggsave('figures/sf.png', height = 12/1.2, width = 16/1.2)
@@ -53,11 +59,12 @@ ggsave('figures/sf.png', height = 12/1.2, width = 16/1.2)
 ggplot(history, aes(x = date, y = finals)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.065) +
-  scale_y_continuous(limits = c(0,1), labels = scales::percent) +
+  geom_image(aes(image = logo), size = 0.085) +
+  scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
+  theme(axis.text.x = element_text(angle = 90)) +
   labs(x = 'Date',
        y = 'Chances of Reaching Finals',
-       title = 'World Cup 2021',
+       title = 'World Cup 2022',
        subtitle = 'Finals Chances Over Time')
 
 ggsave('figures/finals.png', height = 12/1.2, width = 16/1.2)
@@ -66,11 +73,45 @@ ggsave('figures/finals.png', height = 12/1.2, width = 16/1.2)
 ggplot(history, aes(x = date, y = champ)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.065) +
-  scale_y_continuous(limits = c(0,1), labels = scales::percent) +
+  geom_image(aes(image = logo), size = 0.085) +
+  scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
   labs(x = 'Date',
        y = 'Chances of Winning Tournament',
-       title = 'World Cup 2021',
+       title = 'World Cup 2022',
        subtitle = 'Title Chances Over Time')
 
 ggsave('figures/champ.png', height = 12/1.2, width = 16/1.2)
+
+
+df_elim <- 
+  df_stats %>% 
+  mutate('elim_Group' = 1 - r16,
+         'elim_R16' = r16 - qf,
+         'elim_QF' = qf - sf,
+         'elim_SF' = sf - finals,
+         'elim_Final' = finals - champ,
+         'elim_Champ' = champ) %>% 
+  mutate('expected_round' = elim_Group + 2 * elim_R16 + 3 * elim_QF + 4 * elim_SF + 5 * elim_Final + 6 * elim_Champ) %>% 
+  pivot_longer(contains('elim_'),
+               names_to = 'elim_round',
+               names_prefix = 'elim_',
+               values_to = 'elim_prob') %>% 
+  mutate('elim_round' = factor(elim_round, levels = c('Group', 'R16', 'QF', 'SF', 'Final', 'Champ'))) %>% 
+  mutate('team' = fct_reorder(team, desc(expected_round)))
+
+labels <- paste0("<img src ='", unique(df_elim %>% arrange(-expected_round) %>% pull(logo)), "', width = '20'/>")
+ggplot(df_elim, aes(x = team, y = elim_prob)) +
+  geom_col(aes(fill = elim_round)) + 
+  scale_x_discrete(labels = labels) + 
+  scale_y_continuous(labels = scales::percent) +
+  labs(y = 'Probability of Elimincation at Stage',
+       title = 'FIFA World Cup 2022',
+       subtitle = 'Elimination Snapshot',
+       fill = 'Elimination Round') + 
+  theme(axis.text.x = ggtext::element_markdown(),
+        legend.position = 'bottom')
+
+ggsave('figures/elim.png', height = 12/1.2, width = 16/1.2)
+
+
+

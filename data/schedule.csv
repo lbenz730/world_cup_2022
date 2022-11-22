@@ -1,12 +1,12 @@
 date,team1,team2,location,group,ko_round,team1_score,team2_score,shootout_winner
 2022-11-20,Qatar,Ecuador,Qatar,A,NA,0,2,NA
-2022-11-21,Senegal,Netherlands,Qatar,A,NA,NA,NA,NA
+2022-11-21,Senegal,Netherlands,Qatar,A,NA,0,2,NA
 2022-11-25,Qatar,Senegal,Qatar,A,NA,NA,NA,NA
 2022-11-25,Netherlands,Ecuador,Qatar,A,NA,NA,NA,NA
 2022-11-29,Netherlands,Qatar,Qatar,A,NA,NA,NA,NA
 2022-11-29,Ecuador,Senegal,Qatar,A,NA,NA,NA,NA
-2022-11-21,England,Iran,Qatar,B,NA,NA,NA,NA
-2022-11-21,United States,Wales,Qatar,B,NA,NA,NA,NA
+2022-11-21,England,Iran,Qatar,B,NA,6,2,NA
+2022-11-21,United States,Wales,Qatar,B,NA,1,1,NA
 2022-11-25,Wales,Iran,Qatar,B,NA,NA,NA,NA
 2022-11-25,United States,England,Qatar,B,NA,NA,NA,NA
 2022-11-29,Wales,England,Qatar,B,NA,NA,NA,NA

@@ -10,7 +10,7 @@ get_scores <- function(date) {
   penalties_winners <- gsub('\\s+win.*', '', scores$match[penalties_ix])
   df <- 
     tibble('date' = as.Date(date_, '%Y%m%d'),
-           'team1' = gsub( '\\s[A-Z]+\\d+.*$', '', scores[,1]),
+           'team1' = gsub('\\s*USAv\\s*', '', gsub( '\\s[A-Z]+\\d+.*$', '', scores[,1])),
            'team2' = gsub( '\\s[A-Z]+$', '', scores[,2]),
            'team1_score' = as.numeric(str_extract(scores[,1], '\\d+') ),
            'team2_score' = as.numeric(str_extract(scores[,1], '\\d+$') ),
