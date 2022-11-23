@@ -33,6 +33,7 @@ ggsave('figures/r16.png', height = 12/1.2, width = 16/1.2)
 
 ggplot(history, aes(x = date, y = qf)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
+  geom_line(aes(group = team), col = 'black', alpha = 0.4) +
   geom_image(aes(image = logo), size = 0.085) +
   scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
   theme(axis.text.x = element_text(angle = 90)) +
