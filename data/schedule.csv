@@ -13,14 +13,14 @@ date,team1,team2,location,group,ko_round,team1_score,team2_score,shootout_winner
 2022-11-29,Iran,United States,Qatar,B,NA,NA,NA,NA
 2022-11-22,Argentina,Saudi Arabia,Qatar,C,NA,1,2,NA
 2022-11-22,Mexico,Poland,Qatar,C,NA,0,0,NA
-2022-11-26,Poland,Saudi Arabia,Qatar,C,NA,NA,NA,NA
+2022-11-26,Poland,Saudi Arabia,Qatar,C,NA,2,0,NA
 2022-11-26,Argentina,Mexico,Qatar,C,NA,NA,NA,NA
 2022-11-30,Poland,Argentina,Qatar,C,NA,NA,NA,NA
 2022-11-30,Saudi Arabia,Mexico,Qatar,C,NA,NA,NA,NA
 2022-11-22,Denmark,Tunisia,Qatar,D,NA,0,0,NA
 2022-11-22,France,Australia,Qatar,D,NA,4,1,NA
-2022-11-26,Tunisia,Australia,Qatar,D,NA,NA,NA,NA
-2022-11-26,France,Denmark,Qatar,D,NA,NA,NA,NA
+2022-11-26,Tunisia,Australia,Qatar,D,NA,0,1,NA
+2022-11-26,France,Denmark,Qatar,D,NA,2,1,NA
 2022-11-30,Tunisia,France,Qatar,D,NA,NA,NA,NA
 2022-11-30,Australia,Denmark,Qatar,D,NA,NA,NA,NA
 2022-11-23,Germany,Japan,Qatar,E,NA,1,2,NA

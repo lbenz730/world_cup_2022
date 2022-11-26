@@ -9,7 +9,7 @@ source('helpers.R')
 ### Simulation Parameters
 n_sims <- 10000
 set.seed(12345)
-run_date <- Sys.Date()
+run_date <- Sys.Date() 
 
 ### Coefficients
 posterior <- read_rds('model_objects/posterior.rds')

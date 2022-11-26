@@ -100,7 +100,9 @@ group_tiebreak <- function(standings, df_results) {
     group_results <- filter(df_results, group == g)
     
     if(group_standings$points[1] != group_standings$points[4]) {
-      if(group_standings$points[1] == group_standings$points[3]) {
+      if(group_standings$points[1] == group_standings$points[3] & 
+         group_standings$goal_diff[1] == group_standings$goal_diff[3] & 
+         group_standings$goals_scored[1] == group_standings$goals_scored[3]) {
         tiebreak_order <- 
           group_results %>% 
           inner_join(group_standings %>% select(team, place), by = 'team') %>% 
@@ -121,7 +123,9 @@ group_tiebreak <- function(standings, df_results) {
         group_standings$place[1:3] <- ix
       } 
       if((group_standings$points[1] != group_standings$points[3]) & 
-         (group_standings$points[1] == group_standings$points[2])) {
+         (group_standings$points[1] == group_standings$points[2]) & 
+         group_standings$goal_diff[1] == group_standings$goal_diff[2] & 
+         group_standings$goals_scored[1] == group_standings$goals_scored[2]) {
         tiebreak_order <- 
           group_results %>% 
           inner_join(group_standings %>% select(team, place), by = 'team') %>% 
@@ -141,7 +145,9 @@ group_tiebreak <- function(standings, df_results) {
         ix <- map_dbl(1:2, ~which(group_standings$team == tiebreak_order[.x]))
         group_standings$place[1:2] <- ix
       } 
-      if(group_standings$points[2] == group_standings$points[4]) {
+      if(group_standings$points[2] == group_standings$points[4] & 
+         group_standings$goal_diff[2] == group_standings$goal_diff[4] & 
+         group_standings$goals_scored[2] == group_standings$goals_scored[4]) {
         tiebreak_order <- 
           group_results %>% 
           filter(team %in% group_standings$team[2:4], opp %in% group_standings$team[2:4]) %>% 
@@ -162,7 +168,9 @@ group_tiebreak <- function(standings, df_results) {
       }
       if((group_standings$points[2] != group_standings$points[4]) &
          (group_standings$points[1] != group_standings$points[3]) &
-         (group_standings$points[2] == group_standings$points[3])) {
+         (group_standings$points[2] == group_standings$points[3]) & 
+         group_standings$goal_diff[2] == group_standings$goal_diff[3] & 
+         group_standings$goals_scored[2] == group_standings$goals_scored[3]) {
         tiebreak_order <- 
           group_results %>% 
           inner_join(group_standings %>% select(team, place), by = 'team') %>% 
@@ -183,7 +191,9 @@ group_tiebreak <- function(standings, df_results) {
         group_standings$place[2:3] <- ix
       }
       if((group_standings$points[2] != group_standings$points[4]) &
-         (group_standings$points[3] == group_standings$points[4])) {
+         (group_standings$points[3] == group_standings$points[4]) & 
+         group_standings$goal_diff[3] == group_standings$goal_diff[4] & 
+         group_standings$goals_scored[3] == group_standings$goals_scored[4]) {
         tiebreak_order <- 
           group_results %>% 
           inner_join(group_standings %>% select(team, place), by = 'team') %>% 
