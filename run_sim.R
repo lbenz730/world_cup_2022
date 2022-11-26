@@ -22,8 +22,8 @@ df_ratings <- read_csv('predictions/ratings.csv')
 schedule <- 
   read_csv('data/schedule.csv') %>% 
   mutate('date' = as.Date(date, '%m/%d/%y')) %>%
-  # mutate('team1_score' = ifelse(date > run_date, NA, team1_score),
-  #        'team2_score' = ifelse(date > run_date, NA, team2_score)) %>%
+  mutate('team1_score' = ifelse(date > run_date, NA, team1_score),
+         'team2_score' = ifelse(date > run_date, NA, team2_score)) %>%
   mutate('team1_score' = case_when(is.na(shootout_winner) ~ as.numeric(team1_score),
                                    shootout_winner == team1 ~ 0.1 + team1_score,
                                    shootout_winner == team2 ~ -0.1 + team1_score))

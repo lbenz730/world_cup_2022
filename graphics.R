@@ -101,9 +101,10 @@ df_elim <-
   mutate('team' = fct_reorder(team, desc(expected_round)))
 
 labels <- paste0("<img src ='", unique(df_elim %>% arrange(-expected_round) %>% pull(logo)), "', width = '20'/>")
+
 ggplot(df_elim, aes(x = team, y = elim_prob)) +
-  geom_col(aes(fill = elim_round)) + 
-  scale_x_discrete(labels = labels) + 
+  geom_col(aes(fill = elim_round), position = position_fill(reverse = T)) + 
+  scale_x_discrete(labels = labels) +
   scale_y_continuous(labels = scales::percent) +
   labs(y = 'Probability of Elimination at Stage',
        x = '',
