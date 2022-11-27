@@ -41,7 +41,7 @@ if(any(is.na(schedule$team1_score[1:48]))) {
   
   ### Knockout Round
   knockout_brackets <- 
-    future_map(group_stage_results, build_knockout_bracket,
+    future_map(group_stage_results, ~build_knockout_bracket(.x$standings),
                .options = furrr_options(seed = 31121))
 }  else {
   knockout_brackets <- future_map(1:n_sims, ~filter(schedule,  str_detect(ko_round, 'R16'))) 

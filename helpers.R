@@ -88,7 +88,8 @@ sim_group_stage <- function(df_group_stage) {
     mutate('progress' = case_when(place < 3 ~ T,
                                   T ~ F))
   
-  return(standings)
+  return(list('standings' = standings,
+              'results' = df_results))
   
 }
 
