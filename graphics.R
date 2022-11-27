@@ -116,69 +116,69 @@ ggplot(df_elim, aes(x = team, y = elim_prob)) +
 
 ggsave('figures/elim.png', height = 9/1.2, width = 16/1.2)
 
-
-gsr <- read_rds('predictions/sim_rds/group_stage_results.rds')
-
-df_scores <- 
-  future_map_dfr(1:10000, ~{
-    gsr[[.x]]$results %>% 
-      filter(group == 'C') %>% 
-      slice(5:6) %>% 
-      mutate('sim_id' = .x)
-  })
-
-df_advance <- 
-  future_map_dfr(1:10000, ~{
-    gsr[[.x]]$standings %>% 
-      filter(group == 'C') %>% 
-      mutate('sim_id' = .x)
-  })
-
-
-df_summary <- 
-  df_scores %>% 
-  mutate('match' = case_when(team < opp ~ paste(team, '-', opp),
-                             team > opp ~ paste(opp, '-', team))) %>% 
-  mutate('result' = case_when(team_score > opp_score ~ paste(team, team_score, '-', opp_score, opp),
-                              team_score < opp_score ~ paste(opp, opp_score, '-', team_score, team),
-                              team_score == opp_score & team < opp ~ paste(team, team_score, '-', opp_score, opp),
-                              team_score == opp_score & team > opp ~ paste(opp, opp_score, '-', team_score, team))) %>% 
-  mutate('label' = case_when(team_score > opp_score ~ paste0("<img src = 'flags/", team, ".png', width = '12'/>", team_score, ' - ', opp_score,  "<img src = 'flags/", opp, ".png', width = '12'/>"),
-                             team_score < opp_score ~ paste0("<img src = 'flags/", opp, ".png', width = '12'/>", opp_score, ' - ', team_score,  "<img src = 'flags/", team, ".png', width = '12'/>"),
-                             team_score == opp_score & team < opp ~ paste0("<img src = 'flags/", team, ".png', width = '12'/>", team_score, ' - ', opp_score,  "<img src = 'flags/", opp, ".png', width = '12'/>"),
-                             team_score == opp_score & team > opp ~ paste0("<img src = 'flags/", opp, ".png', width = '12'/>", opp_score, ' - ', team_score,  "<img src = 'flags/", team, ".png', width = '12'/>"))) %>% 
-  
-  mutate('margin' = team_score - opp_score,
-         'winning_score' = pmax(team_score, opp_score),
-         'losing_score' = pmin(team_score, opp_score),) %>% 
-  select(-team, -opp) %>% 
-  left_join(df_advance) %>% 
-  group_by(match, team, result, margin, winning_score, losing_score, label) %>% 
-  summarise('n' = n(),
-            'place_1' = mean(place == 1),
-            'place_2' = mean(place == 2),
-            'p_advance' = mean(progress)) %>% 
-  filter(abs(margin) <= 3, winning_score <= 2) %>% 
-  ungroup() %>%
-  arrange(match, margin, -winning_score, losing_score) %>% 
-  mutate('result' = factor(result, levels = unique(result))) %>% 
-  mutate('label' = factor(label, levels = unique(label)))
-
-
-
-ggplot(df_summary, aes(x = label, y = p_advance, group = team)) + 
-  facet_wrap(~match, scales = 'free_x') + 
-  geom_col(aes(fill = team), position = 'dodge') + 
-  geom_text(aes(label = paste0(round(100 * p_advance), '%')), 
-            size = 3,
-            vjust = -0.5,
-            position = position_dodge(width = 0.99)) + 
-  scale_y_continuous(labels = scales::percent) + 
-  scale_fill_manual(values = c('skyblue', '#006341', 'red', 'lightgreen')) + 
-  theme(axis.text.x = ggtext::element_markdown(),
-        legend.position = 'bottom') + 
-  labs(title = 'Probability of Reaching Knockout Round',
-       subtitle = 'Group C',
-       x = '',
-       fill = '')
-ggsave('figures/group_c_match3.png', height = 9, width = 16)     
+# 
+# gsr <- read_rds('predictions/sim_rds/group_stage_results.rds')
+# 
+# df_scores <- 
+#   future_map_dfr(1:10000, ~{
+#     gsr[[.x]]$results %>% 
+#       filter(group == 'C') %>% 
+#       slice(5:6) %>% 
+#       mutate('sim_id' = .x)
+#   })
+# 
+# df_advance <- 
+#   future_map_dfr(1:10000, ~{
+#     gsr[[.x]]$standings %>% 
+#       filter(group == 'C') %>% 
+#       mutate('sim_id' = .x)
+#   })
+# 
+# 
+# df_summary <- 
+#   df_scores %>% 
+#   mutate('match' = case_when(team < opp ~ paste(team, '-', opp),
+#                              team > opp ~ paste(opp, '-', team))) %>% 
+#   mutate('result' = case_when(team_score > opp_score ~ paste(team, team_score, '-', opp_score, opp),
+#                               team_score < opp_score ~ paste(opp, opp_score, '-', team_score, team),
+#                               team_score == opp_score & team < opp ~ paste(team, team_score, '-', opp_score, opp),
+#                               team_score == opp_score & team > opp ~ paste(opp, opp_score, '-', team_score, team))) %>% 
+#   mutate('label' = case_when(team_score > opp_score ~ paste0("<img src = 'flags/", team, ".png', width = '12'/>", team_score, ' - ', opp_score,  "<img src = 'flags/", opp, ".png', width = '12'/>"),
+#                              team_score < opp_score ~ paste0("<img src = 'flags/", opp, ".png', width = '12'/>", opp_score, ' - ', team_score,  "<img src = 'flags/", team, ".png', width = '12'/>"),
+#                              team_score == opp_score & team < opp ~ paste0("<img src = 'flags/", team, ".png', width = '12'/>", team_score, ' - ', opp_score,  "<img src = 'flags/", opp, ".png', width = '12'/>"),
+#                              team_score == opp_score & team > opp ~ paste0("<img src = 'flags/", opp, ".png', width = '12'/>", opp_score, ' - ', team_score,  "<img src = 'flags/", team, ".png', width = '12'/>"))) %>% 
+#   
+#   mutate('margin' = team_score - opp_score,
+#          'winning_score' = pmax(team_score, opp_score),
+#          'losing_score' = pmin(team_score, opp_score),) %>% 
+#   select(-team, -opp) %>% 
+#   left_join(df_advance) %>% 
+#   group_by(match, team, result, margin, winning_score, losing_score, label) %>% 
+#   summarise('n' = n(),
+#             'place_1' = mean(place == 1),
+#             'place_2' = mean(place == 2),
+#             'p_advance' = mean(progress)) %>% 
+#   filter(abs(margin) <= 3, winning_score <= 2) %>% 
+#   ungroup() %>%
+#   arrange(match, margin, -winning_score, losing_score) %>% 
+#   mutate('result' = factor(result, levels = unique(result))) %>% 
+#   mutate('label' = factor(label, levels = unique(label)))
+# 
+# 
+# 
+# ggplot(df_summary, aes(x = label, y = p_advance, group = team)) + 
+#   facet_wrap(~match, scales = 'free_x') + 
+#   geom_col(aes(fill = team), position = 'dodge') + 
+#   geom_text(aes(label = paste0(round(100 * p_advance), '%')), 
+#             size = 3,
+#             vjust = -0.5,
+#             position = position_dodge(width = 0.99)) + 
+#   scale_y_continuous(labels = scales::percent) + 
+#   scale_fill_manual(values = c('skyblue', '#006341', 'red', 'lightgreen')) + 
+#   theme(axis.text.x = ggtext::element_markdown(),
+#         legend.position = 'bottom') + 
+#   labs(title = 'Probability of Reaching Knockout Round',
+#        subtitle = 'Group C',
+#        x = '',
+#        fill = '')
+# ggsave('figures/group_c_match3.png', height = 9, width = 16)     

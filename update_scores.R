@@ -6,7 +6,7 @@ get_scores <- function(date) {
   date_ <- gsub('-', '', date)
   url <- paste0('https://www.espn.com/soccer/fixtures/_/date/', date_, '/league/fifa.world')
   scores <- readHTMLTable(getURL(url))
-  scores <- scores[[length(scores)]]
+  scores <- scores[[1]]
   penalties_ix <- 1 + which(str_detect(scores$result, 'FT-Pens'))
   penalties_winners <- gsub('\\s+win.*', '', scores$match[penalties_ix])
   df <- 

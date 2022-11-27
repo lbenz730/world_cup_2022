@@ -111,7 +111,7 @@ final_teams <- bind_rows(finals_results) %>% pivot_longer(c('team1', 'team2')) %
 winners <- bind_rows(finals_results) %>% mutate('champ' = ifelse(team1_score > team2_score, team1, team2)) %>% pull(champ)
 
 df_stats <- 
-  bind_rows(group_stage_results) %>% 
+  map_dfr(group_stage_results, ~.x$standings) %>% 
   group_by(team, group) %>% 
   summarise('mean_pts' = mean(points),
             'mean_gd' = mean(goal_diff),
@@ -138,7 +138,8 @@ history <-
   arrange(date)
 write_csv(history, 'predictions/history.csv')
 
-write_rds(group_stage_results, 'predictions/sim_rds/group_stage_results.rds')
+write_rds(map(group_stage_results, .x$standings), 'predictions/sim_rds/group_stage_results.rds')
+write_rds(map(group_stage_results, .x$results), 'predictions/sim_rds/group_stage_game_results.rds')
 write_rds(r16_results, 'predictions/sim_rds/r16_results.rds')
 write_rds(qf_results, 'predictions/sim_rds/qf_results.rds')
 write_rds(sf_results, 'predictions/sim_rds/sf_results.rds')
