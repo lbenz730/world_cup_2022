@@ -138,8 +138,8 @@ history <-
   arrange(date)
 write_csv(history, 'predictions/history.csv')
 
-write_rds(map(group_stage_results, .x$standings), 'predictions/sim_rds/group_stage_results.rds')
-write_rds(map(group_stage_results, .x$results), 'predictions/sim_rds/group_stage_game_results.rds')
+write_rds(map(group_stage_results, ~.x$standings), 'predictions/sim_rds/group_stage_results.rds')
+write_rds(map(group_stage_results, ~.x$results), 'predictions/sim_rds/group_stage_game_results.rds')
 write_rds(r16_results, 'predictions/sim_rds/r16_results.rds')
 write_rds(qf_results, 'predictions/sim_rds/qf_results.rds')
 write_rds(sf_results, 'predictions/sim_rds/sf_results.rds')
