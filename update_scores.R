@@ -11,7 +11,7 @@ get_scores <- function(date) {
   penalties_winners <- gsub('\\s+win.*', '', scores$match[penalties_ix])
   df <- 
     tibble('date' = as.Date(date_, '%Y%m%d'),
-           'team1' = gsub('\\s*USAv\\s*', '', gsub( '\\s[A-Z]+\\d+.*$', '', scores[,1])),
+           'team1' = gsub('\\s*[A-Z][A-Z][A-Z]v\\s*', '', gsub( '\\s[A-Z]+\\d+.*$', '', scores[,1])),
            'team2' = gsub( '\\s[A-Z]+$', '', scores[,2]),
            'team1_score' = as.numeric(str_extract(scores[,1], '\\d+') ),
            'team2_score' = as.numeric(str_extract(scores[,1], '\\d+$') ),
@@ -38,6 +38,18 @@ schedule <-
 
 ### Get Scores for Tournament
 scores <- map_dfr(seq.Date(as.Date('2022-11-20'), Sys.Date(), 1), get_scores)
+ko_games <- 
+  map_dfr(schedule$date[!is.na(schedule$ko_round)], get_scores) %>% 
+  filter(team1 %in% c(scores$team1, scores$team2),  team2 %in% c(scores$team1, scores$team2)) %>% 
+  distinct() %>% 
+  filter(team1 > team2)
+
+
+for(i in 1:nrow(ko_games)) {
+  ix_game <- min(which(schedule$date == ko_games$date[i] & is.na(schedule$team1)))
+  schedule$team1[ix_game] <- ko_games$team1[i]
+  schedule$team2[ix_game] <- ko_games$team2[i]
+}
 
 ### Update Scores
 schedule <- 
