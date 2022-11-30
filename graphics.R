@@ -195,10 +195,10 @@ match3_plot <- function(group_, score_max, colors) {
 
 # match3_plot('A', score_max = 2, c('#FFD100', '#FFA500', '#8A1538', '#00853F'))
 # match3_plot('B', score_max = 2, c('#2B57AC', '#239F40', '#0A3161', '#C8102E'))
-match3_plot('C', score_max = 2, c('#6CACE4', '#006341', '#002654', '#165d31'))
-match3_plot('D', score_max = 2, c('#FFF200', '#C8102E', '#0A3161', '#C8102E'))
-# match3_plot('E', score_max = 2, c('#2B57AC', '#239F40', '#0A3161', '#C8102E'))
-# match3_plot('F', score_max = 2, c('#FFD100', '#FFA500', '#8A1538', '#00853F'))
+# match3_plot('C', score_max = 2, c('#6CACE4', '#006341', '#C8102E', '#165d31'))
+# match3_plot('D', score_max = 2, c('#FFF200', '#C60C30', '#002654', '#C8102E'))
+match3_plot('E', score_max = 2, c('#000000', '#FFCC00', '#BC002D', '#F1BF00'))
+match3_plot('F', score_max = 2, c('#FFCD00', '#D80621', '#012169', '#C1272D'))
 # match3_plot('G', score_max = 2, c('#2B57AC', '#239F40', '#0A3161', '#C8102E'))
 # match3_plot('H', score_max = 2, c('#FFD100', '#FFA500', '#8A1538', '#00853F'))
 
