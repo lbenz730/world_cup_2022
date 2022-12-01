@@ -7,11 +7,13 @@ plan(multicore(workers = parallel::detectCores()-1))
 
 history <- 
   read_csv('predictions/history.csv') %>% 
-  mutate('logo' = paste0('flags/', team, '.png'))
+  mutate('logo' = paste0('flags/', team, '.png')) %>% 
+  mutate('eliminated' = (qf == 0))
 
 df_stats <- 
   read_csv('predictions/sim_results.csv') %>% 
-  mutate('logo' = paste0('flags/', team, '.png'))
+  mutate('logo' = paste0('flags/', team, '.png')) 
+
 
 theme_set(theme_bw() + 
             theme(plot.title = element_text(size = 24, hjust = 0.5),
@@ -22,10 +24,20 @@ theme_set(theme_bw() +
                   legend.position = "none")
 )
 
+transparent <- function(img) {
+  magick::image_fx(img, expression = "0.5*a", channel = "alpha")
+}
+
 ggplot(history, aes(x = date, y = r16)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.085) +
+  geom_image(data = filter(history, !eliminated), 
+             aes(image = logo),
+             size = 0.085) + 
+  geom_image(data = filter(history, eliminated), 
+             aes(image = logo),
+             image_fun = transparent, 
+             size = 0.085) + 
   scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
   theme(axis.text.x = element_text(angle = 90)) + 
   labs(x = 'Date',
@@ -38,7 +50,13 @@ ggsave('figures/r16.png', height = 12/1.2, width = 16/1.2)
 ggplot(history, aes(x = date, y = qf)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.085) +
+  geom_image(data = filter(history, !eliminated), 
+             aes(image = logo),
+             size = 0.085) + 
+  geom_image(data = filter(history, eliminated), 
+             aes(image = logo),
+             image_fun = transparent, 
+             size = 0.085) + 
   scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
   theme(axis.text.x = element_text(angle = 90)) +
   labs(x = 'Date',
@@ -51,7 +69,13 @@ ggsave('figures/qf.png', height = 12/1.2, width = 16/1.2)
 ggplot(history, aes(x = date, y = sf)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.085) +
+  geom_image(data = filter(history, !eliminated), 
+             aes(image = logo),
+             size = 0.085) + 
+  geom_image(data = filter(history, eliminated), 
+             aes(image = logo),
+             image_fun = transparent, 
+             size = 0.085) + 
   scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
   theme(axis.text.x = element_text(angle = 90)) +
   labs(x = 'Date',
@@ -64,7 +88,13 @@ ggsave('figures/sf.png', height = 12/1.2, width = 16/1.2)
 ggplot(history, aes(x = date, y = finals)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.085) +
+  geom_image(data = filter(history, !eliminated), 
+             aes(image = logo),
+             size = 0.085) + 
+  geom_image(data = filter(history, eliminated), 
+             aes(image = logo),
+             image_fun = transparent, 
+             size = 0.085) + 
   scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
   theme(axis.text.x = element_text(angle = 90)) +
   labs(x = 'Date',
@@ -78,7 +108,13 @@ ggsave('figures/finals.png', height = 12/1.2, width = 16/1.2)
 ggplot(history, aes(x = date, y = champ)) +
   facet_wrap(~paste('Group', group), ncol = 4) +
   geom_line(aes(group = team), col = 'black', alpha = 0.4) +
-  geom_image(aes(image = logo), size = 0.085) +
+  geom_image(data = filter(history, !eliminated), 
+             aes(image = logo),
+             size = 0.085) + 
+  geom_image(data = filter(history, eliminated), 
+             aes(image = logo),
+             image_fun = transparent, 
+             size = 0.085) + 
   scale_y_continuous(limits = c(0,1), labels = scales::percent) + 
   labs(x = 'Date',
        y = 'Chances of Winning Tournament',
@@ -90,6 +126,7 @@ ggsave('figures/champ.png', height = 12/1.2, width = 16/1.2)
 
 df_elim <- 
   df_stats %>% 
+  filter(r16 > 0) %>% 
   mutate('elim_Group' = 1 - r16,
          'elim_R16' = r16 - qf,
          'elim_QF' = qf - sf,
@@ -103,6 +140,7 @@ df_elim <-
                values_to = 'elim_prob') %>% 
   mutate('elim_round' = factor(elim_round, levels = c('Group', 'R16', 'QF', 'SF', 'Final', 'Champ'))) %>% 
   mutate('team' = fct_reorder(team, desc(expected_round)))
+  
 
 labels <- paste0("<img src ='", unique(df_elim %>% arrange(-expected_round) %>% pull(logo)), "', width = '20'/>")
 
@@ -197,7 +235,7 @@ match3_plot <- function(group_, score_max, colors) {
 # match3_plot('B', score_max = 2, c('#2B57AC', '#239F40', '#0A3161', '#C8102E'))
 # match3_plot('C', score_max = 2, c('#6CACE4', '#006341', '#C8102E', '#165d31'))
 # match3_plot('D', score_max = 2, c('#FFF200', '#C60C30', '#002654', '#C8102E'))
-match3_plot('E', score_max = 2, c('#000000', '#FFCC00', '#BC002D', '#F1BF00'))
+match3_plot('E', score_max = 2, c('#002654', '#000000', '#BC002D', '#F1BF00'))
 match3_plot('F', score_max = 2, c('#FFCD00', '#D80621', '#012169', '#C1272D'))
 # match3_plot('G', score_max = 2, c('#2B57AC', '#239F40', '#0A3161', '#C8102E'))
 # match3_plot('H', score_max = 2, c('#FFD100', '#FFA500', '#8A1538', '#00853F'))
