@@ -44,6 +44,9 @@ ko_games <-
   distinct() %>% 
   filter(team1 > team2)
 
+schedule$team1[!is.na(schedule$ko_round) & is.na(schedule$team1_score)] <- NA
+schedule$team2[!is.na(schedule$ko_round) & is.na(schedule$team2_score)] <- NA
+
 
 for(i in 1:nrow(ko_games)) {
   ix_game <- min(which(schedule$date == ko_games$date[i] & is.na(schedule$team1)))
