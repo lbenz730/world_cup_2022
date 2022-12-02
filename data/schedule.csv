@@ -39,22 +39,22 @@ date,team1,team2,location,group,ko_round,team1_score,team2_score,shootout_winner
 2022-11-24,Brazil,Serbia,Qatar,G,NA,2,0,NA
 2022-11-28,Cameroon,Serbia,Qatar,G,NA,3,3,NA
 2022-11-28,Brazil,Switzerland,Qatar,G,NA,1,0,NA
-2022-12-02,Cameroon,Brazil,Qatar,G,NA,NA,NA,NA
-2022-12-02,Serbia,Switzerland,Qatar,G,NA,NA,NA,NA
+2022-12-02,Cameroon,Brazil,Qatar,G,NA,1,0,NA
+2022-12-02,Serbia,Switzerland,Qatar,G,NA,2,3,NA
 2022-11-24,Uruguay,South Korea,Qatar,H,NA,0,0,NA
 2022-11-24,Portugal,Ghana,Qatar,H,NA,3,2,NA
 2022-11-28,South Korea,Ghana,Qatar,H,NA,2,3,NA
 2022-11-28,Portugal,Uruguay,Qatar,H,NA,2,0,NA
-2022-12-02,South Korea,Portugal,Qatar,H,NA,NA,NA,NA
-2022-12-02,Ghana,Uruguay,Qatar,H,NA,NA,NA,NA
+2022-12-02,South Korea,Portugal,Qatar,H,NA,2,1,NA
+2022-12-02,Ghana,Uruguay,Qatar,H,NA,0,2,NA
 2022-12-03,United States,Netherlands,Qatar,NA,R16 1,NA,NA,NA
 2022-12-03,Australia,Argentina,Qatar,NA,R16 2,NA,NA,NA
 2022-12-05,Japan,Croatia,Qatar,NA,R16 3,NA,NA,NA
-2022-12-05,NA,NA,Qatar,NA,R16 4,NA,NA,NA
+2022-12-05,Japan,Croatia,Qatar,NA,R16 4,NA,NA,NA
 2022-12-04,Senegal,England,Qatar,NA,R16 5,NA,NA,NA
 2022-12-04,Poland,France,Qatar,NA,R16 6,NA,NA,NA
 2022-12-06,Spain,Morocco,Qatar,NA,R16 7,NA,NA,NA
-2022-12-06,NA,NA,Qatar,NA,R16 8,NA,NA,NA
+2022-12-06,Spain,Morocco,Qatar,NA,R16 8,NA,NA,NA
 2022-12-09,NA,NA,Qatar,NA,QF 1,NA,NA,NA
 2022-12-09,NA,NA,Qatar,NA,QF 2,NA,NA,NA
 2022-12-10,NA,NA,Qatar,NA,QF 3,NA,NA,NA
