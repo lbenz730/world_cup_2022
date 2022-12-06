@@ -8,7 +8,7 @@ plan(multicore(workers = parallel::detectCores()-1))
 history <- 
   read_csv('predictions/history.csv') %>% 
   mutate('logo' = paste0('flags/', team, '.png')) %>% 
-  mutate('eliminated' = (qf == 0))
+  mutate('eliminated' = (sf == 0))
 
 df_stats <- 
   read_csv('predictions/sim_results.csv') %>% 
@@ -215,7 +215,7 @@ ggsave('figures/champ_by_bracket.png', height = 12/1.2, width = 16/1.2)
 
 df_elim <- 
   df_stats %>% 
-  filter(r16 > 0) %>% 
+  filter(finals > 0) %>% 
   mutate('elim_Group' = 1 - r16,
          'elim_R16' = r16 - qf,
          'elim_QF' = qf - sf,
