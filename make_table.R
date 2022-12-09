@@ -161,7 +161,7 @@ map(LETTERS[1:8], ~gtsave(make_table(Group = .x), filename = paste0('figures/', 
 
 
 
-round <- 'r16'
+round <- 'qf'
 rounds <- names(df_stats)[9:which(names(df_stats) == round)]
 
 df <-
@@ -238,7 +238,7 @@ ko_table <-
     delta = 'Defense',
     net_rating = 'Overall',
     # r16 = 'R16',
-    qf = 'QF',
+    # qf = 'QF',
     sf = 'SF',
     finals = 'Finals',
     champ = 'Champ'
