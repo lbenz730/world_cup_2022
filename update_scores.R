@@ -20,7 +20,7 @@ get_scores <- function(date) {
     slice(setdiff(1:nrow(.), penalties_ix))
   
   if(length(penalties_ix) > 0) {
-    df$shootout_winner[penalties_ix] <- penalties_winners
+    df$shootout_winner[penalties_ix - 1:length(penalties_ix)] <- penalties_winners
   }
   
   df <- bind_rows(df, select(df, date,

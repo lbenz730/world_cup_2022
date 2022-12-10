@@ -57,8 +57,8 @@ date,team1,team2,location,group,ko_round,team1_score,team2_score,shootout_winner
 2022-12-06,Switzerland,Portugal,Qatar,NA,R16 8,1,6,NA
 2022-12-09,Croatia,Brazil,Qatar,NA,QF 1,1,1,Croatia
 2022-12-09,Netherlands,Argentina,Qatar,NA,QF 2,2,2,Argentina
-2022-12-10,France,England,Qatar,NA,QF 3,NA,NA,NA
-2022-12-10,Portugal,Morocco,Qatar,NA,QF 4,NA,NA,NA
+2022-12-10,Portugal,Morocco,Qatar,NA,QF 3,0,1,NA
+2022-12-10,France,England,Qatar,NA,QF 4,2,1,NA
 2022-12-13,Croatia,Argentina,Qatar,NA,SF 1,NA,NA,NA
-2022-12-14,NA,NA,Qatar,NA,SF 2,NA,NA,NA
-2022-12-18,NA,NA,Qatar,NA,FINAL,NA,NA,NA
+2022-12-14,Morocco,France,Qatar,NA,SF 2,NA,NA,NA
+2022-12-18,Semifinal 2 Winner SF W2,Semifinal 1 Winner SF,Qatar,NA,FINAL,NA,1,NA
