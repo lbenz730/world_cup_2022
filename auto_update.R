@@ -2,7 +2,8 @@
 source('update_scores.R')
 
 ## Re-Fit Model After Each Round --> new preds
-if(as.character(Sys.Date()) %in% c('2022-11-24', '2022-11-28', '2022-12-02', '2022-12-06')) {
+if(as.character(Sys.Date()) %in% c('2022-11-24', '2022-11-28', '2022-12-02', 
+                                   '2022-12-06', '2022-12-10')) {
   source('fit_model.R')
   source('game_preds.R')
 }
