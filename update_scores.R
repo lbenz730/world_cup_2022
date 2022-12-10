@@ -3,6 +3,7 @@ library(RCurl)
 library(tidyverse)
 
 get_scores <- function(date) {
+  print(date)
   date_ <- gsub('-', '', date)
   url <- paste0('https://www.espn.com/soccer/fixtures/_/date/', date_, '/league/fifa.world')
   scores <- readHTMLTable(getURL(url))
@@ -37,7 +38,7 @@ schedule <-
   mutate('date' = as.Date(date, '%m/%d/%y'))
 
 ### Get Scores for Tournament
-scores <- map_dfr(seq.Date(as.Date('2022-11-20'), Sys.Date(), 1), get_scores)
+scores <- map_dfr(unique(schedule$date), get_scores)
 ko_games <- 
   map_dfr(schedule$date[!is.na(schedule$ko_round)], get_scores) %>% 
   filter(team1 %in% c(scores$team1, scores$team2),  team2 %in% c(scores$team1, scores$team2)) %>% 
