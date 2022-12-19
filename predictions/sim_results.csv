@@ -1,25 +1,25 @@
 team,group,mean_pts,mean_gd,r16,qf,sf,finals,champ
-Argentina,C,6,3,1,1,1,0.628,0.3431
+Argentina,C,6,3,1,1,1,1,0.4956
 Australia,D,6,-1,1,0,0,0,0
 Belgium,F,4,-1,0,0,0,0,0
 Brazil,G,6,2,1,1,0,0,0
 Cameroon,G,4,0,0,0,0,0,0
 Canada,F,0,-5,0,0,0,0,0
 Costa Rica,E,3,-8,0,0,0,0,0
-Croatia,F,5,3,1,1,1,0.372,0.1475
+Croatia,F,5,3,1,1,1,0,0
 Denmark,D,1,-2,0,0,0,0,0
 Ecuador,A,4,1,0,0,0,0,0
-England,B,7,7,1,1,0.4769,0.2717,0.1453
-France,D,6,3,1,1,0.5231,0.3089,0.1709
+England,B,7,7,1,1,0,0,0
+France,D,6,3,1,1,1,1,0.5044
 Germany,E,4,1,0,0,0,0,0
 Ghana,H,3,-2,0,0,0,0,0
 Iran,B,3,-3,0,0,0,0,0
 Japan,E,6,1,1,0,0,0,0
 Mexico,C,4,-1,0,0,0,0,0
-Morocco,F,7,3,1,1,0.4053,0.1522,0.0593
+Morocco,F,7,3,1,1,1,0,0
 Netherlands,A,7,4,1,1,0,0,0
 Poland,C,4,0,1,0,0,0,0
-Portugal,H,6,2,1,1,0.5947,0.2672,0.1339
+Portugal,H,6,2,1,1,0,0,0
 Qatar,A,0,-6,0,0,0,0,0
 Saudi Arabia,C,3,-2,0,0,0,0,0
 Senegal,A,6,1,1,0,0,0,0

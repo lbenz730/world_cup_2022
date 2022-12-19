@@ -8,7 +8,7 @@ plan(multicore(workers = parallel::detectCores()-1))
 history <- 
   read_csv('predictions/history.csv') %>% 
   mutate('logo' = paste0('flags/', team, '.png')) %>% 
-  mutate('eliminated' = (sf == 0))
+  mutate('eliminated' = (finals == 0))
 
 df_stats <- 
   read_csv('predictions/sim_results.csv') %>% 
